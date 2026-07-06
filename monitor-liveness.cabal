@@ -1,0 +1,38 @@
+cabal-version:      2.4
+name:               monitor-liveness
+version:            0.1.0
+synopsis:           Autômato-monitor de prova de vida (LTLf → DFA) com vereditos de três valores
+description:        Protótipo funcional do modelo formal do artigo: o detector de deepfake
+                    é um oráculo que rotula eventos; o monitor é um DFA puro que compõe
+                    esses rótulos com o protocolo de desafio-resposta e emite aceito,
+                    rejeitado ou inconclusivo.
+license:            MIT
+build-type:         Simple
+
+library
+    hs-source-dirs:   src
+    exposed-modules:  Types
+                      Monitor
+                      TraceIO
+    build-depends:    base >=4 && <5
+                    , containers
+    default-language: Haskell2010
+    ghc-options:      -Wall
+
+executable monitor-liveness
+    hs-source-dirs:   app
+    main-is:          Main.hs
+    build-depends:    base
+                    , monitor-liveness
+    default-language: Haskell2010
+    ghc-options:      -Wall
+
+test-suite spec
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Spec.hs
+    build-depends:    base
+                    , containers
+                    , monitor-liveness
+    default-language: Haskell2010
+    ghc-options:      -Wall
